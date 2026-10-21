@@ -52,7 +52,6 @@
         }
 
         /* 左栏 */
-        .sidebar { position: relative; }
         .sidebar-sticky { position: sticky; top: 88px; }
 
         .avatar-wrapper {
@@ -66,6 +65,9 @@
         }
         .avatar-wrapper img.hover { opacity: 0; }
         .avatar-wrapper:hover img.hover { opacity: 1; }
+        .avatar-hint {
+            text-align: center; font-size: 0.72rem; color: #b0b0b0; margin: -14px 0 18px;
+        }
 
         .sidebar h1 { font-size: 1.7rem; text-align: center; margin-bottom: 4px; }
         .sidebar .role { text-align: center; color: var(--accent); font-weight: 500; margin-bottom: 4px; }
@@ -107,7 +109,7 @@
         .timeline-item ul { padding-left: 18px; color: #4b5563; font-size: 0.92rem; }
         .timeline-item li { margin-bottom: 4px; }
 
-        /* 出版物卡片 */
+        /* 出版物 / 项目卡片 */
         .pub-card {
             border-left: 4px solid var(--accent); padding: 4px 0 4px 16px; margin-bottom: 22px;
         }
@@ -122,15 +124,68 @@
         }
         .pub-card .links a:hover { text-decoration: underline; }
 
+        /* 履历嵌套块 */
+        .pub-history {
+            margin-top: 14px; padding: 14px 16px;
+            background: #f6f7f9; border-radius: 10px;
+            border-left: 2px solid #dfe3e8;
+        }
+        .pub-history .ph-label {
+            font-size: 0.72rem; text-transform: uppercase; letter-spacing: .06em;
+            color: #9ca3af; margin-bottom: 9px;
+        }
+        .pub-history .former-title {
+            font-size: 0.87rem; color: #6b7280; font-style: italic;
+            padding-bottom: 9px; margin-bottom: 9px; border-bottom: 1px dashed #e2e5e9;
+        }
+        .pub-history ul { padding-left: 17px; color: #4b5563; font-size: 0.88rem; }
+        .pub-history li { margin-bottom: 5px; }
+        .pub-history li:last-child { margin-bottom: 0; }
+        .pub-history .award { color: #b45309; font-weight: 500; }
+
+        /* 进行中的项目 */
+        .ongoing-card {
+            border-left: 4px solid #10b981; padding: 4px 0 4px 16px; margin-bottom: 22px;
+        }
+        .ongoing-card h3 { font-size: 1rem; margin-bottom: 4px; }
+        .ongoing-card .meta { color: var(--muted); font-size: 0.85rem; font-style: italic; margin-bottom: 8px; }
+        .ongoing-card .abs { color: #4b5563; font-size: 0.9rem; }
+        .ongoing-card .links { margin-top: 8px; }
+        .ongoing-card .links a {
+            font-size: 0.82rem; color: var(--accent); text-decoration: none;
+            margin-right: 14px; font-weight: 500;
+        }
+        .ongoing-card .links a:hover { text-decoration: underline; }
+
         .subsection-label {
             font-size: 0.78rem; text-transform: uppercase; letter-spacing: .06em;
             color: #9ca3af; margin: 28px 0 14px;
         }
+        .subsection-label:first-of-type { margin-top: 0; }
+
+        /* 教学 */
+        .course-row {
+            display: flex; justify-content: space-between; align-items: baseline;
+            gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--border);
+        }
+        .course-row > div:first-child { flex: 1 1 auto; min-width: 0; }
+        .course-row .term { flex: 0 0 auto; }
+        .course-row:last-child { border-bottom: none; }
+        .course-row .code {
+            font-size: 0.78rem; color: var(--accent); background: #eff6ff;
+            border-radius: 5px; padding: 2px 8px; margin-right: 10px;
+            font-weight: 600; white-space: nowrap;
+        }
+        .course-row h3 { font-size: 0.98rem; font-weight: 500; display: inline; }
+        .course-row .term { color: var(--muted); font-size: 0.85rem; white-space: nowrap; }
+        .course-row .role { color: var(--muted); font-size: 0.82rem; }
+        .teaching-note { color: var(--muted); font-size: 0.85rem; margin-top: 14px; }
 
         @media (max-width: 860px) {
             .container { grid-template-columns: 1fr; gap: 32px; }
             .sidebar-sticky { position: static; }
             .avatar-wrapper { width: 160px; height: 160px; }
+            .nav-links { overflow-x: auto; }
         }
     </style>
 </head>
@@ -143,6 +198,7 @@
                 <a href="#education">Education</a>
                 <a href="#work">Work</a>
                 <a href="#research">Research</a>
+                <a href="#teaching">Teaching</a>
             </div>
         </div>
     </nav>
@@ -153,8 +209,9 @@
             <div class="sidebar-sticky">
                 <div class="avatar-wrapper">
                     <img src="avatar.jpg" alt="Dawei Xiong">
-                    <img class="hover" src="hover.jpg" alt="Dawei Xiong">
+                    <img class="hover" src="hover.jpg" alt="Dawei Xiong — AI-generated portrait">
                 </div>
+                <p class="avatar-hint">hover to transform</p>
                 <h1 class="serif">Dawei Xiong</h1>
                 <p class="role">Ph.D. Student</p>
                 <p class="affil">The Hong Kong University of Science and Technology (Guangzhou)</p>
@@ -237,34 +294,74 @@
                 <h2 class="serif">Research</h2>
 
                 <div class="subsection-label">Publications</div>
+
                 <div class="pub-card">
                     <h3>Cognitive Load as a Hidden Cost of Empathy: Tradeoffs in Using VR for Inclusive Design</h3>
                     <p class="authors">Xiong, D., Ma, Z., Ling, H., Wu, X., Fan, M., &amp; Zhang, X.</p>
                     <p class="venue">International Journal of Human–Computer Interaction, 2026</p>
                     <p class="abs">We conducted a between-subjects experiment comparing passive video with non-emotional and emotional interactive VR simulations of low-vision mobility challenges. Both VR conditions increased empathy relative to video, but emotional VR produced no additional measurable gain, whereas non-emotional VR produced stronger user-need-aligned ideation. Drawing on cognitive load theory, we argue that emotional intensity can impose a hidden cognitive cost that undercuts the design benefits of empathy.</p>
                     <p class="links"><a href="https://doi.org/10.1080/10447318.2026.2730903" target="_blank" rel="noopener">DOI</a></p>
+
+                    <div class="pub-history">
+                        <p class="ph-label">Publication History</p>
+                        <p class="former-title">Earlier titled "Enhancing Empathy Through Virtual Reality: A Behavioral Experiment on Understanding Service Users with Visual Impairments".</p>
+                        <ul>
+                            <li>International Research Society for Public Management (IRSPM) Conference, Bologna, Italy — <strong>Presented, April 2025</strong></li>
+                            <li>CHI 2026 (ACM Conference on Human Factors in Computing Systems) — <strong>Rejected in Second Round, December 2025</strong></li>
+                            <li class="award">🏆 First Prize for Excellent Thesis, 2025 Lingnan Academic Forum</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="subsection-label">Research Experience</div>
-                <div class="pub-card">
-                    <h3>Enhancing Empathy Through Virtual Reality: A Behavioral Experiment on Understanding Service Users with Visual Impairments</h3>
-                    <p class="authors">Xiong, D., Ling, H., Zhang, X., &amp; Wu, X.</p>
-                    <p class="venue">IRSPM 2025 (Accepted, April 2025)</p>
-                    <p class="abs">Investigates how VR enhances empathy toward visually impaired individuals, providing experimental evidence for technology's role in promoting equitable social services and behavioral public administration.</p>
-                    <p class="abs"><strong>Award:</strong> First Prize for Excellent Thesis, 2025 Lingnan Academic Forum.</p>
-                </div>
                 <div class="pub-card">
                     <h3>Investigating Size Congruency Between the Visual Perception of a VR Object and the Haptic Perception of Its Physical World Agent</h3>
                     <p class="authors">Zheng, W., Xiong, D., Li, J., Jiang, J., Weng, C., Zhou, J., &amp; Fan, M.</p>
-                    <p class="venue">17th International Symposium on Visual Information Communication and Interaction (VINCI), 2024</p>
+                    <p class="venue">17th International Symposium on Visual Information Communication and Interaction (VINCI), 2024, pp. 1–9</p>
                     <p class="abs">Confirmation/adjustment ratios for virtual object sizes; participants' correct size confirmation likelihood decreases with object size, requiring more adjustments for larger objects.</p>
+                    <p class="links"><a href="https://doi.org/10.1145/3678698.3678706" target="_blank" rel="noopener">DOI</a></p>
                 </div>
-                <div class="pub-card">
-                    <h3>Unbundling of Business Incubation Services: Evidence from China</h3>
-                    <p class="authors">Luo, N., Xiong, D., Peng, C., Yarime, M., &amp; Wu, X.</p>
-                    <p class="venue">The Ninth Asia Pacific Public Policy Network Conference (Presented, April 2024)</p>
-                    <p class="abs">Identifies a new incubation service model with unbundled services, allowing incubators to specialize and startups to collaborate with multiple incubators.</p>
+
+                <div class="subsection-label">Ongoing Process</div>
+
+                <div class="ongoing-card">
+                    <h3>Career Backgrounds and Value Conflict Management: Discourse Strategies in the Hong Kong Legislative Council</h3>
+                    <p class="meta">Legislator behavior research · IPEN5810 final project</p>
+                    <p class="abs">Built a fully structured dataset from Hong Kong LegCo Hansard records — meeting agendas, floor speeches, official voting outcomes and legislator profiles — and combined LLM coding, grounded theory and econometric models to test how legislators' career backgrounds shape the value trade-offs behind their policy votes.</p>
                 </div>
+
+                <div class="ongoing-card">
+                    <h3>SocioVerse2 — A Longitudinal Dynamic Social Simulation Platform</h3>
+                    <p class="meta">Multi-agent platform · arXiv:2609.24911</p>
+                    <p class="abs">A general multi-agent social-simulation platform in which a fixed population of LLM agents with persistent identities lives through a continuously changing environment. Interventions and counterfactual branches are recorded as versions of the same study, and every step is stored as panel data — making social evolution visible, branchable and testable.</p>
+                    <p class="links"><a href="https://arxiv.org/abs/2609.24911" target="_blank" rel="noopener">arXiv</a><a href="https://socioverse.fudan-disc.com/" target="_blank" rel="noopener">Website</a></p>
+                </div>
+
+                <div class="ongoing-card">
+                    <h3>AI Court — Who Is Responsible When AI Gets It Wrong?</h3>
+                    <p class="meta">Public-interest platform · <a href="https://ai-court.xion516.com" target="_blank" rel="noopener" style="color:inherit;">ai-court.xion516.com</a></p>
+                    <p class="abs">A public adjudication platform where a three-reviewer panel (two human reviewers and one AI reviewer) rules on whether an AI deserves to be held responsible for what it did — turning real-world AI failures into an open, citable case law.</p>
+                </div>
+            </section>
+
+            <section id="teaching" class="block">
+                <h2 class="serif">Teaching</h2>
+                <div class="course-row">
+                    <div><span class="code">UFUG 1801</span><h3>Principles of Economics</h3></div>
+                    <span class="term">Fall 2026 · Teaching Assistant</span>
+                </div>
+                <div class="course-row">
+                    <div><span class="code">IPEN5120</span><h3>Research Design for Innovation, Policy and Entrepreneurship Studies</h3></div>
+                    <span class="term">Spring 2026 · Teaching Assistant</span>
+                </div>
+                <div class="course-row">
+                    <div><span class="code">SOCH 5000</span><h3>Introduction to Technological Innovation and Social Entrepreneurship</h3></div>
+                    <span class="term">Fall 2025 · Teaching Assistant</span>
+                </div>
+                <div class="course-row">
+                    <div><span class="code">UCMP 6030</span><h3>Cross-disciplinary Design Thinking</h3></div>
+                    <span class="term">Spring 2025 · Teaching Assistant</span>
+                </div>
+                <p class="teaching-note">All courses taught at The Hong Kong University of Science and Technology (Guangzhou).</p>
             </section>
         </main>
     </div>
