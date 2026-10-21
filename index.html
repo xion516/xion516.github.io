@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dawei Xiong — Personal Page</title>
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem('xion516-lang') === 'zh') {
+                    document.documentElement.classList.add('lang-flash');
+                }
+            } catch (e) {}
+        })();
+    </script>
     <meta name="description" content="PhD student at The Hong Kong University of Science and Technology (Guangzhou).">
     <meta name="author" content="Dawei Xiong">
     <style>
@@ -44,6 +53,15 @@
             padding: 6px 12px; border-radius: 8px; transition: color .15s, background .15s;
         }
         .nav-links a:hover { color: var(--text); background: #f0f0f0; }
+        .nav-right { display: flex; align-items: center; gap: 14px; }
+        .lang-toggle {
+            font-family: inherit; font-size: 0.85rem; color: var(--muted);
+            background: none; border: 1px solid var(--border); border-radius: 8px;
+            padding: 5px 13px; cursor: pointer; white-space: nowrap;
+            transition: color .15s, border-color .15s;
+        }
+        .lang-toggle:hover { color: var(--accent); border-color: var(--accent); }
+        html.lang-flash body { visibility: hidden; }
 
         /* 主容器：左右两栏 */
         .container {
@@ -209,13 +227,16 @@
 <body>
     <nav>
         <div class="nav-inner">
-            <span class="nav-brand serif">Dawei Xiong</span>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#education">Education</a>
-                <a href="#work">Work</a>
-                <a href="#research">Research</a>
-                <a href="#teaching">Teaching</a>
+            <span class="nav-brand serif" data-zh="熊大卫">Dawei Xiong</span>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#about" data-zh="关于我">About</a>
+                    <a href="#education" data-zh="教育背景">Education</a>
+                    <a href="#work" data-zh="工作">Work</a>
+                    <a href="#research" data-zh="研究">Research</a>
+                    <a href="#teaching" data-zh="教学">Teaching</a>
+                </div>
+                <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to Chinese">中文</button>
             </div>
         </div>
     </nav>
@@ -228,10 +249,10 @@
                     <img src="avatar.jpg" alt="Dawei Xiong">
                     <img class="hover" src="hover.jpg" alt="Dawei Xiong — AI-generated portrait">
                 </div>
-                <p class="avatar-hint">hover to transform</p>
-                <h1 class="serif">Dawei Xiong</h1>
-                <p class="role">Ph.D. Student</p>
-                <p class="affil">The Hong Kong University of Science and Technology (Guangzhou)</p>
+                <p class="avatar-hint" data-zh="悬停查看另一面">hover to transform</p>
+                <h1 class="serif" data-zh="熊大卫">Dawei Xiong</h1>
+                <p class="role" data-zh="博士研究生">Ph.D. Student</p>
+                <p class="affil" data-zh="香港科技大学（广州）">The Hong Kong University of Science and Technology (Guangzhou)</p>
 
                 <div class="social-row">
                     <a href="mailto:dxiong107@connect.hkust-gz.edu.cn" aria-label="Email">
@@ -249,12 +270,12 @@
                 </div>
 
                 <div class="interest-box">
-                    <h3>Research Interests</h3>
-                    <span class="tag">Behavioral Public Administration</span>
-                    <span class="tag">AI Agent</span>
-                    <span class="tag">Virtual Reality</span>
-                    <span class="tag">Inclusive Governance</span>
-                    <span class="tag">Human-Computer Interaction</span>
+                    <h3 data-zh="研究兴趣">Research Interests</h3>
+                    <span class="tag" data-zh="行为公共管理">Behavioral Public Administration</span>
+                    <span class="tag" data-zh="AI 智能体">AI Agent</span>
+                    <span class="tag" data-zh="虚拟现实">Virtual Reality</span>
+                    <span class="tag" data-zh="包容性治理">Inclusive Governance</span>
+                    <span class="tag" data-zh="人机交互">Human-Computer Interaction</span>
                 </div>
             </div>
         </aside>
@@ -262,80 +283,80 @@
         <!-- 右栏 -->
         <main class="main">
             <section id="about" class="block">
-                <h2 class="serif">About</h2>
-                <p class="bio">
+                <h2 class="serif" data-zh="关于我">About</h2>
+                <p class="bio" data-zh="我目前是香港科技大学（广州）社会枢纽创新创业与公共政策学域的博士研究生，研究兴趣包括行为公共管理、AI 智能体、虚拟现实（VR）与包容性治理。">
                     I am currently a Ph.D. student at HKUST(GZ) Society Hub, Innovation, Policy and Entrepreneurship Thrust.
                     My research interests include behavioral public administration, AI Agent, Virtual Reality (VR), and inclusive governance.
                 </p>
             </section>
 
             <section id="education" class="block">
-                <h2 class="serif">Education</h2>
+                <h2 class="serif" data-zh="教育背景">Education</h2>
                 <div class="timeline-item">
-                    <div class="timeline-head"><h3>HKUST(GZ) — Ph.D. in Innovation, Policy and Entrepreneurship</h3><span class="date">2025.9 – Present</span></div>
-                    <p class="place">Guangzhou, China</p>
-                    <p class="supervisors"><span class="sup-label">Supervisors</span><a href="https://facultyprofiles.hkust-gz.edu.cn/faculty-personal-page/WU-Xun/wuxun" target="_blank" rel="noopener">Xun Wu</a><span class="sep">·</span><a href="https://www.zhang-xu.com/" target="_blank" rel="noopener">Xu Zhang</a></p>
+                    <div class="timeline-head"><h3 data-zh="香港科技大学（广州）— 创新创业与公共政策学域 博士">HKUST(GZ) — Ph.D. in Innovation, Policy and Entrepreneurship</h3><span class="date">2025.9 – Present</span></div>
+                    <p class="place" data-zh="中国广州">Guangzhou, China</p>
+                    <p class="supervisors"><span class="sup-label" data-zh="导师">Supervisors</span><a href="https://facultyprofiles.hkust-gz.edu.cn/faculty-personal-page/WU-Xun/wuxun" target="_blank" rel="noopener" data-zh="吴逊">Xun Wu</a><span class="sep">·</span><a href="https://www.zhang-xu.com/" target="_blank" rel="noopener" data-zh="张旭">Xu Zhang</a></p>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-head"><h3>HKUST(GZ) — M.Phil. in Innovation, Policy and Entrepreneurship</h3><span class="date">2023.9 – 2025.7</span></div>
-                    <p class="place">Guangzhou, China</p>
-                    <p class="supervisors"><span class="sup-label">Supervisors</span><a href="https://facultyprofiles.hkust-gz.edu.cn/faculty-personal-page/WU-Xun/wuxun" target="_blank" rel="noopener">Xun Wu</a><span class="sep">·</span><a href="https://www.mingmingfan.com/" target="_blank" rel="noopener">Mingming Fan</a></p>
+                    <div class="timeline-head"><h3 data-zh="香港科技大学（广州）— 创新创业与公共政策学域 硕士">HKUST(GZ) — M.Phil. in Innovation, Policy and Entrepreneurship</h3><span class="date">2023.9 – 2025.7</span></div>
+                    <p class="place" data-zh="中国广州">Guangzhou, China</p>
+                    <p class="supervisors"><span class="sup-label" data-zh="导师">Supervisors</span><a href="https://facultyprofiles.hkust-gz.edu.cn/faculty-personal-page/WU-Xun/wuxun" target="_blank" rel="noopener" data-zh="吴逊">Xun Wu</a><span class="sep">·</span><a href="https://www.mingmingfan.com/" target="_blank" rel="noopener" data-zh="范明明">Mingming Fan</a></p>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-head"><h3>Sun Yat-sen University — B.S. in Applied Psychology</h3><span class="date">2012.9 – 2016.7</span></div>
-                    <p class="place">Guangzhou, China</p>
-                    <p class="supervisors"><span class="sup-label">Supervisor</span><a href="https://psy.sysu.edu.cn/teacher/314" target="_blank" rel="noopener">Lehua Cheng</a></p>
+                    <div class="timeline-head"><h3 data-zh="中山大学 — 应用心理学 学士">Sun Yat-sen University — B.S. in Applied Psychology</h3><span class="date">2012.9 – 2016.7</span></div>
+                    <p class="place" data-zh="中国广州">Guangzhou, China</p>
+                    <p class="supervisors"><span class="sup-label" data-zh="导师">Supervisor</span><a href="https://psy.sysu.edu.cn/teacher/314" target="_blank" rel="noopener" data-zh="程乐华">Lehua Cheng</a></p>
                 </div>
             </section>
 
             <section id="work" class="block">
-                <h2 class="serif">Work Experience</h2>
+                <h2 class="serif" data-zh="工作经历">Work Experience</h2>
                 <div class="timeline-item">
-                    <div class="timeline-head"><h3>YUANHUO Technology — Co-founder & COO</h3><span class="date">2024.5 – Present</span></div>
-                    <p class="place">Guangzhou, China</p>
+                    <div class="timeline-head"><h3 data-zh="YUANHUO Technology — 联合创始人兼首席运营官（COO）">YUANHUO Technology — Co-founder & COO</h3><span class="date">2024.5 – Present</span></div>
+                    <p class="place" data-zh="中国广州">Guangzhou, China</p>
                     <ul>
-                        <li>Company focus: multi-modal AI agent solutions for digital education and marketing.</li>
-                        <li>"LLM-driven digital friends and communities for you" won <strong>2025 CES Innovation Award</strong> (only one from mainland China, shortest time to exist).</li>
-                        <li>Responsibilities: business development, process optimization, internal operations management.</li>
+                        <li data-zh="公司方向：面向数字教育与营销的多模态 AI 智能体解决方案。">Company focus: multi-modal AI agent solutions for digital education and marketing.</li>
+                        <li data-zh="「用大模型驱动的、属于你的数字朋友与社区」获 <strong>2025 CES 创新奖</strong>（本届唯一来自中国大陆、且成立时间最短的获奖项目）。">"LLM-driven digital friends and communities for you" won <strong>2025 CES Innovation Award</strong> (only one from mainland China, shortest time to exist).</li>
+                        <li data-zh="职责：业务拓展、流程优化与内部运营管理。">Responsibilities: business development, process optimization, internal operations management.</li>
                     </ul>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-head"><h3>HKUST BLUEBAY Incubator — Supervisor / Officer / Assistant</h3><span class="date">2016.12 – 2022.6</span></div>
-                    <p class="place">Shenzhen, China</p>
+                    <div class="timeline-head"><h3 data-zh="港科大 BLUEBAY 孵化器 — 导师 / 主管 / 助理">HKUST BLUEBAY Incubator — Supervisor / Officer / Assistant</h3><span class="date">2016.12 – 2022.6</span></div>
+                    <p class="place" data-zh="中国深圳">Shenzhen, China</p>
                     <ul>
-                        <li>Organized HKUST One Million Dollar Competition (Shenzhen) for 5 years (2017–2021).</li>
-                        <li>Helped startups refine business plans and connect with industrial partners.</li>
-                        <li>Built and operated BLUEBAY Incubator (Futian Base) since 2020; incubated 20 enterprises.</li>
+                        <li data-zh="连续 5 年（2017–2021）策划并执行港科大百万美元创业大赛（深圳赛区）。">Organized HKUST One Million Dollar Competition (Shenzhen) for 5 years (2017–2021).</li>
+                        <li data-zh="协助创业团队打磨商业计划书，并对接产业界合作伙伴。">Helped startups refine business plans and connect with industrial partners.</li>
+                        <li data-zh="自 2020 年起建设并运营 BLUEBAY 孵化器（福田基地），累计孵化 20 家企业。">Built and operated BLUEBAY Incubator (Futian Base) since 2020; incubated 20 enterprises.</li>
                     </ul>
                 </div>
             </section>
 
             <section id="research" class="block">
-                <h2 class="serif">Research</h2>
+                <h2 class="serif" data-zh="研究">Research</h2>
 
-                <div class="subsection-label">Publications</div>
+                <div class="subsection-label" data-zh="论文发表">Publications</div>
 
                 <div class="pub-card">
                     <h3>Cognitive Load as a Hidden Cost of Empathy: Tradeoffs in Using VR for Inclusive Design</h3>
                     <p class="authors">Xiong, D., Ma, Z., Ling, H., Wu, X., Fan, M., &amp; Zhang, X.</p>
-                    <p class="venue">International Journal of Human–Computer Interaction, 2026</p>
-                    <p class="abs">We conducted a between-subjects experiment comparing passive video with non-emotional and emotional interactive VR simulations of low-vision mobility challenges. Both VR conditions increased empathy relative to video, but emotional VR produced no additional measurable gain, whereas non-emotional VR produced stronger user-need-aligned ideation. Drawing on cognitive load theory, we argue that emotional intensity can impose a hidden cognitive cost that undercuts the design benefits of empathy.</p>
+                    <p class="venue" data-zh="《International Journal of Human–Computer Interaction》，2026">International Journal of Human–Computer Interaction, 2026</p>
+                    <p class="abs" data-zh="我们采用组间实验设计，将被动视频与「非情绪化」「情绪化」两种交互式 VR 模拟（模拟低视力群体的出行障碍场景）进行对比。两个 VR 组的共情水平均高于视频组，但情绪化 VR 并未带来额外的可测量提升；相反，非情绪化 VR 产生的设计想法与用户真实需求的契合度高于其余两组。基于认知负荷理论，我们认为情绪强度会施加一种隐性的认知代价，削弱共情本应带来的设计收益。">We conducted a between-subjects experiment comparing passive video with non-emotional and emotional interactive VR simulations of low-vision mobility challenges. Both VR conditions increased empathy relative to video, but emotional VR produced no additional measurable gain, whereas non-emotional VR produced stronger user-need-aligned ideation. Drawing on cognitive load theory, we argue that emotional intensity can impose a hidden cognitive cost that undercuts the design benefits of empathy.</p>
                     <p class="links"><a href="https://doi.org/10.1080/10447318.2026.2730903" target="_blank" rel="noopener">DOI</a></p>
 
                     <div class="pub-history">
-                        <p class="ph-label">Publication History</p>
-                        <p class="former-title">Earlier titled "Enhancing Empathy Through Virtual Reality: A Behavioral Experiment on Understanding Service Users with Visual Impairments".</p>
+                        <p class="ph-label" data-zh="发表历程">Publication History</p>
+                        <p class="former-title" data-zh="曾用名「Enhancing Empathy Through Virtual Reality: A Behavioral Experiment on Understanding Service Users with Visual Impairments」。">Earlier titled "Enhancing Empathy Through Virtual Reality: A Behavioral Experiment on Understanding Service Users with Visual Impairments".</p>
                         <div class="ph-item">
-                            <p class="ph-what">🎤 Presented, April 2025</p>
-                            <p class="ph-where">International Research Society for Public Management (IRSPM) Conference, Bologna, Italy</p>
+                            <p class="ph-what" data-zh="已汇报，2025 年 4 月">🎤 Presented, April 2025</p>
+                            <p class="ph-where" data-zh="国际公共管理学会（IRSPM）年会，意大利博洛尼亚">International Research Society for Public Management (IRSPM) Conference, Bologna, Italy</p>
                         </div>
                         <div class="ph-item">
-                            <p class="ph-what">❌ Rejected in Second Round, December 2025</p>
-                            <p class="ph-where">CHI 2026 — ACM Conference on Human Factors in Computing Systems</p>
+                            <p class="ph-what" data-zh="二审未通过，2025 年 12 月">❌ Rejected in Second Round, December 2025</p>
+                            <p class="ph-where" data-zh="CHI 2026 — ACM 人机交互系统计算因素会议">CHI 2026 — ACM Conference on Human Factors in Computing Systems</p>
                         </div>
                         <div class="ph-item award">
-                            <p class="ph-what">🏆 First Prize for Excellent Thesis</p>
-                            <p class="ph-where">2025 Lingnan Academic Forum</p>
+                            <p class="ph-what" data-zh="优秀论文一等奖">🏆 First Prize for Excellent Thesis</p>
+                            <p class="ph-where" data-zh="2025 岭南学术论坛">2025 Lingnan Academic Forum</p>
                         </div>
                     </div>
                 </div>
@@ -343,65 +364,107 @@
                 <div class="pub-card">
                     <h3>Investigating Size Congruency Between the Visual Perception of a VR Object and the Haptic Perception of Its Physical World Agent</h3>
                     <p class="authors">Zheng, W., Xiong, D., Li, J., Jiang, J., Weng, C., Zhou, J., &amp; Fan, M.</p>
-                    <p class="venue">17th International Symposium on Visual Information Communication and Interaction (VINCI), 2024, pp. 1–9</p>
-                    <p class="abs">Confirmation/adjustment ratios for virtual object sizes; participants' correct size confirmation likelihood decreases with object size, requiring more adjustments for larger objects.</p>
+                    <p class="venue" data-zh="第 17 届视觉信息传播与交互国际研讨会（VINCI），2024，pp. 1–9">17th International Symposium on Visual Information Communication and Interaction (VINCI), 2024, pp. 1–9</p>
+                    <p class="abs" data-zh="研究虚拟物体尺寸的「确认 / 调整」比例：物体越大，参与者正确确认其尺寸的可能性越低，所需的调整次数也越多。">Confirmation/adjustment ratios for virtual object sizes; participants' correct size confirmation likelihood decreases with object size, requiring more adjustments for larger objects.</p>
                     <p class="links"><a href="https://doi.org/10.1145/3678698.3678706" target="_blank" rel="noopener">DOI</a></p>
                 </div>
 
-                <div class="subsection-label">Ongoing Process</div>
+                <div class="subsection-label" data-zh="进行中的研究">Ongoing Process</div>
 
                 <div class="ongoing-card">
                     <h3>Research in Legislative Debate</h3>
-                    <p class="meta">Legislator behavior research · Politics · Grounded Theory</p>
-                    <p class="abs">Examines how legislators reason through and handle public-value trade-offs, using constructivist grounded theory on official records from three Hong Kong Legislative Council terms.</p>
+                    <p class="meta" data-zh="立法者行为研究 · 政治学 · 扎根理论">Legislator behavior research · Politics · Grounded Theory</p>
+                    <p class="abs" data-zh="以香港立法会三届议会的官方记录为素材，运用建构主义扎根理论，考察立法者如何推理并处理公共价值之间的权衡。">Examines how legislators reason through and handle public-value trade-offs, using constructivist grounded theory on official records from three Hong Kong Legislative Council terms.</p>
                 </div>
 
                 <div class="ongoing-card">
                     <h3>Recombination and Coordination Processes in Multidisciplinary Academic Entrepreneurial Teams: Explaining Innovative New Venture Idea Generation</h3>
-                    <p class="meta">Multi-discipline Co-operation · Organization Science · LLM Agent-based Modeling</p>
-                    <p class="abs">Opens the process black box between academic entrepreneurial team composition and early-stage new venture idea generation. Using LLM-based agent simulation, it traces how disciplinary differences expand recombination potential while simultaneously creating coordination friction — representing team members with different disciplinary orientations and generating complete interaction traces of how ideas are proposed, challenged, revised and recombined.</p>
+                    <p class="meta" data-zh="跨学科合作 · 组织科学 · 基于 LLM 智能体的建模">Multi-discipline Co-operation · Organization Science · LLM Agent-based Modeling</p>
+                    <p class="abs" data-zh="打开「学术创业团队构成 → 早期新创业想法生成」之间的过程黑箱。研究以 LLM 智能体模拟具有不同学科取向的团队成员交互，完整记录想法如何被提出、质疑、修正与重组，从而追踪学科差异如何在扩大重组潜力的同时制造协调摩擦。">Opens the process black box between academic entrepreneurial team composition and early-stage new venture idea generation. Using LLM-based agent simulation, it traces how disciplinary differences expand recombination potential while simultaneously creating coordination friction — representing team members with different disciplinary orientations and generating complete interaction traces of how ideas are proposed, challenged, revised and recombined.</p>
                 </div>
 
                 <div class="ongoing-card">
-                    <h3>AI Court — Who Is Responsible When AI Gets It Wrong?</h3>
-                    <p class="meta">AI Liability Adjudication · Public Administration · Human-AI Panel Review</p>
-                    <p class="abs">A public adjudication platform where a three-reviewer panel (two human reviewers and one AI reviewer) rules on whether an AI deserves to be held responsible for what it did — turning real-world AI failures into an open, citable case law. <a href="https://ai-court.xion516.com" target="_blank" rel="noopener" style="color:inherit;">ai-court.xion516.com</a></p>
+                    <h3 data-zh="AI Court — 当 AI 犯了错，谁该负责？">AI Court — Who Is Responsible When AI Gets It Wrong?</h3>
+                    <p class="meta" data-zh="AI 责任裁定 · 公共管理 · 人机协同评审">AI Liability Adjudication · Public Administration · Human-AI Panel Review</p>
+                    <p class="abs" data-zh="一个公开裁定平台：由三人评审团（两名人类评审 + 一名 AI 评审）裁定某个 AI 是否应当为它的行为承担责任——把现实世界中的 AI 翻车事件，变成可公开引用、可供讨论的「案例法」。">A public adjudication platform where a three-reviewer panel (two human reviewers and one AI reviewer) rules on whether an AI deserves to be held responsible for what it did — turning real-world AI failures into an open, citable case law.</p>
+                    <p class="links"><a href="https://ai-court.xion516.com" target="_blank" rel="noopener">ai-court.xion516.com</a></p>
                 </div>
             </section>
 
             <section id="teaching" class="block">
-                <h2 class="serif">Teaching</h2>
+                <h2 class="serif" data-zh="教学">Teaching</h2>
                 <div class="course-row">
                     <div class="course-info">
                         <h3>Principles of Economics</h3>
-                        <p class="course-sub"><span class="code">UFUG 1801</span>Teaching Assistant</p>
+                        <p class="course-sub"><span class="code">UFUG 1801</span><span class="ta" data-zh="助教">Teaching Assistant</span></p>
                     </div>
-                    <span class="term">Fall 2026</span>
+                    <span class="term" data-zh="2026 秋季">Fall 2026</span>
                 </div>
                 <div class="course-row">
                     <div class="course-info">
                         <h3>Research Design for Innovation, Policy and Entrepreneurship Studies</h3>
-                        <p class="course-sub"><span class="code">IPEN5120</span>Teaching Assistant</p>
+                        <p class="course-sub"><span class="code">IPEN5120</span><span class="ta" data-zh="助教">Teaching Assistant</span></p>
                     </div>
-                    <span class="term">Spring 2026</span>
+                    <span class="term" data-zh="2026 春季">Spring 2026</span>
                 </div>
                 <div class="course-row">
                     <div class="course-info">
                         <h3>Introduction to Technological Innovation and Social Entrepreneurship</h3>
-                        <p class="course-sub"><span class="code">SOCH 5000</span>Teaching Assistant</p>
+                        <p class="course-sub"><span class="code">SOCH 5000</span><span class="ta" data-zh="助教">Teaching Assistant</span></p>
                     </div>
-                    <span class="term">Fall 2025</span>
+                    <span class="term" data-zh="2025 秋季">Fall 2025</span>
                 </div>
                 <div class="course-row">
                     <div class="course-info">
                         <h3>Cross-disciplinary Design Thinking</h3>
-                        <p class="course-sub"><span class="code">UCMP 6030</span>Teaching Assistant</p>
+                        <p class="course-sub"><span class="code">UCMP 6030</span><span class="ta" data-zh="助教">Teaching Assistant</span></p>
                     </div>
-                    <span class="term">Spring 2025</span>
+                    <span class="term" data-zh="2025 春季">Spring 2025</span>
                 </div>
-                <p class="teaching-note">All courses taught at The Hong Kong University of Science and Technology (Guangzhou).</p>
+                <p class="teaching-note" data-zh="以上课程均在香港科技大学（广州）开设。">All courses taught at The Hong Kong University of Science and Technology (Guangzhou).</p>
             </section>
         </main>
     </div>
+
+    <script>
+        (function () {
+            var KEY = 'xion516-lang';
+            var orig = new WeakMap();
+
+            function apply(lang) {
+                var nodes = document.querySelectorAll('[data-zh]');
+                for (var i = 0; i < nodes.length; i++) {
+                    var el = nodes[i];
+                    if (!orig.has(el)) { orig.set(el, el.innerHTML); }
+                    var v = (lang === 'zh') ? el.getAttribute('data-zh') : null;
+                    el.innerHTML = (v !== null && v !== undefined) ? v : orig.get(el);
+                }
+                document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
+                document.title = (lang === 'zh') ? '熊大卫 — 个人主页' : 'Dawei Xiong — Personal Page';
+                var btn = document.getElementById('langToggle');
+                if (btn) {
+                    btn.textContent = (lang === 'zh') ? 'EN' : '中文';
+                    btn.setAttribute('aria-label', (lang === 'zh') ? 'Switch to English' : '切换到中文');
+                }
+                document.documentElement.classList.remove('lang-flash');
+            }
+
+            var lang = 'en';
+            try { lang = localStorage.getItem(KEY) || 'en'; } catch (e) {}
+            window.__setLang = function (l) {
+                lang = l;
+                try { localStorage.setItem(KEY, l); } catch (e) {}
+                apply(l);
+            };
+            apply(lang);
+
+            var btn = document.getElementById('langToggle');
+            if (btn) {
+                btn.addEventListener('click', function () {
+                    window.__setLang(lang === 'zh' ? 'en' : 'zh');
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
