@@ -142,6 +142,17 @@
         .pub-history li { margin-bottom: 5px; }
         .pub-history li:last-child { margin-bottom: 0; }
         .pub-history .award { color: #b45309; font-weight: 500; }
+        /* 履历条目：上=发生了什么，下=具体会议 */
+        .ph-item { position: relative; padding-left: 14px; margin-bottom: 11px; }
+        .ph-item:last-child { margin-bottom: 0; }
+        .ph-item::before {
+            content: ''; position: absolute; left: 0; top: 7px;
+            width: 5px; height: 5px; border-radius: 50%; background: #cbd5e1;
+        }
+        .ph-what { font-size: 0.9rem; font-weight: 600; color: #374151; }
+        .ph-where { font-size: 0.85rem; color: var(--muted); margin-top: 1px; }
+        .ph-item.award::before { background: #d97706; }
+        .ph-item.award .ph-what { color: #b45309; }
 
         /* 进行中的项目 */
         .ongoing-card {
@@ -303,11 +314,18 @@
                     <div class="pub-history">
                         <p class="ph-label">Publication History</p>
                         <p class="former-title">Earlier titled "Enhancing Empathy Through Virtual Reality: A Behavioral Experiment on Understanding Service Users with Visual Impairments".</p>
-                        <ul>
-                            <li>International Research Society for Public Management (IRSPM) Conference, Bologna, Italy — <strong>Presented, April 2025</strong></li>
-                            <li>CHI 2026 (ACM Conference on Human Factors in Computing Systems) — <strong>Rejected in Second Round, December 2025</strong></li>
-                            <li class="award">🏆 First Prize for Excellent Thesis, 2025 Lingnan Academic Forum</li>
-                        </ul>
+                        <div class="ph-item">
+                            <p class="ph-what">Presented, April 2025</p>
+                            <p class="ph-where">International Research Society for Public Management (IRSPM) Conference, Bologna, Italy</p>
+                        </div>
+                        <div class="ph-item">
+                            <p class="ph-what">Rejected in Second Round, December 2025</p>
+                            <p class="ph-where">CHI 2026 — ACM Conference on Human Factors in Computing Systems</p>
+                        </div>
+                        <div class="ph-item award">
+                            <p class="ph-what">🏆 First Prize for Excellent Thesis</p>
+                            <p class="ph-where">2025 Lingnan Academic Forum</p>
+                        </div>
                     </div>
                 </div>
 
