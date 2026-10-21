@@ -165,21 +165,19 @@
 
         /* 教学 */
         .course-row {
-            display: flex; justify-content: space-between; align-items: baseline;
-            gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: flex-start;
+            gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--border);
         }
-        .course-row > div:first-child { flex: 1 1 auto; min-width: 0; }
-        .course-row .term { flex: 0 0 auto; }
-        .course-row:last-child { border-bottom: none; }
-        .course-row .code {
-            font-size: 0.78rem; color: var(--accent); background: #eff6ff;
-            border-radius: 5px; padding: 2px 8px; margin-right: 10px;
-            font-weight: 600; white-space: nowrap;
+        .course-row:last-of-type { border-bottom: none; }
+        .course-info { flex: 1 1 auto; min-width: 0; }
+        .course-info h3 { font-size: 1.06rem; font-weight: 600; color: var(--text); line-height: 1.45; }
+        .course-sub { margin-top: 5px; font-size: 0.82rem; color: var(--muted); }
+        .course-sub .code {
+            color: var(--accent); background: #eff6ff; border-radius: 5px;
+            padding: 2px 8px; margin-right: 9px; font-weight: 600;
         }
-        .course-row h3 { font-size: 0.98rem; font-weight: 500; display: inline; }
-        .course-row .term { color: var(--muted); font-size: 0.85rem; white-space: nowrap; }
-        .course-row .role { color: var(--muted); font-size: 0.82rem; }
-        .teaching-note { color: var(--muted); font-size: 0.85rem; margin-top: 14px; }
+        .course-row .term { flex: 0 0 auto; color: var(--muted); font-size: 0.86rem; padding-top: 3px; }
+        .teaching-note { color: var(--muted); font-size: 0.85rem; margin-top: 16px; }
 
         @media (max-width: 860px) {
             .container { grid-template-columns: 1fr; gap: 32px; }
@@ -324,42 +322,53 @@
                 <div class="subsection-label">Ongoing Process</div>
 
                 <div class="ongoing-card">
-                    <h3>Career Backgrounds and Value Conflict Management: Discourse Strategies in the Hong Kong Legislative Council</h3>
-                    <p class="meta">Legislator behavior research · IPEN5810 final project</p>
-                    <p class="abs">Built a fully structured dataset from Hong Kong LegCo Hansard records — meeting agendas, floor speeches, official voting outcomes and legislator profiles — and combined LLM coding, grounded theory and econometric models to test how legislators' career backgrounds shape the value trade-offs behind their policy votes.</p>
+                    <h3>Reorganizing Public-Value Trade-offs: Authority, Argument, and Judgment in Legislative Debate</h3>
+                    <p class="meta">Legislator behavior research · Politics · Grounded Theory</p>
+                    <p class="abs">Examines how legislators reason through and handle public-value trade-offs, using constructivist grounded theory on official records from three Hong Kong Legislative Council terms — 646 meetings, 1,147 agendas and 34,165 speaking turns. Five reasoning operations emerge: procedural reorganization, contestation of representative authorization, additional evaluative requirement, situated case-based reweighting, and normative elevation. The core category shows that legislators do more than advance positions within a given trade-off — they contest whether the controversy remains open for public consideration, whose reasons carry public authority, and on what terms it will be judged.</p>
                 </div>
 
                 <div class="ongoing-card">
-                    <h3>SocioVerse2 — A Longitudinal Dynamic Social Simulation Platform</h3>
-                    <p class="meta">Multi-agent platform · arXiv:2609.24911</p>
-                    <p class="abs">A general multi-agent social-simulation platform in which a fixed population of LLM agents with persistent identities lives through a continuously changing environment. Interventions and counterfactual branches are recorded as versions of the same study, and every step is stored as panel data — making social evolution visible, branchable and testable.</p>
-                    <p class="links"><a href="https://arxiv.org/abs/2609.24911" target="_blank" rel="noopener">arXiv</a><a href="https://socioverse.fudan-disc.com/" target="_blank" rel="noopener">Website</a></p>
+                    <h3>Recombination and Coordination Processes in Multidisciplinary Academic Entrepreneurial Teams: Explaining Innovative New Venture Idea Generation</h3>
+                    <p class="meta">Multi-discipline Co-operation · Organization Science · LLM Agent-based Modeling</p>
+                    <p class="abs">Opens the process black box between academic entrepreneurial team composition and early-stage new venture idea generation. Using LLM-based agent simulation, it traces how disciplinary differences expand recombination potential while simultaneously creating coordination friction — representing team members with different disciplinary orientations and generating complete interaction traces of how ideas are proposed, challenged, revised and recombined.</p>
                 </div>
 
                 <div class="ongoing-card">
                     <h3>AI Court — Who Is Responsible When AI Gets It Wrong?</h3>
-                    <p class="meta">Public-interest platform · <a href="https://ai-court.xion516.com" target="_blank" rel="noopener" style="color:inherit;">ai-court.xion516.com</a></p>
-                    <p class="abs">A public adjudication platform where a three-reviewer panel (two human reviewers and one AI reviewer) rules on whether an AI deserves to be held responsible for what it did — turning real-world AI failures into an open, citable case law.</p>
+                    <p class="meta">AI Liability Adjudication · Public Administration · Human-AI Panel Review</p>
+                    <p class="abs">A public adjudication platform where a three-reviewer panel (two human reviewers and one AI reviewer) rules on whether an AI deserves to be held responsible for what it did — turning real-world AI failures into an open, citable case law. <a href="https://ai-court.xion516.com" target="_blank" rel="noopener" style="color:inherit;">ai-court.xion516.com</a></p>
                 </div>
             </section>
 
             <section id="teaching" class="block">
                 <h2 class="serif">Teaching</h2>
                 <div class="course-row">
-                    <div><span class="code">UFUG 1801</span><h3>Principles of Economics</h3></div>
-                    <span class="term">Fall 2026 · Teaching Assistant</span>
+                    <div class="course-info">
+                        <h3>Principles of Economics</h3>
+                        <p class="course-sub"><span class="code">UFUG 1801</span>Teaching Assistant</p>
+                    </div>
+                    <span class="term">Fall 2026</span>
                 </div>
                 <div class="course-row">
-                    <div><span class="code">IPEN5120</span><h3>Research Design for Innovation, Policy and Entrepreneurship Studies</h3></div>
-                    <span class="term">Spring 2026 · Teaching Assistant</span>
+                    <div class="course-info">
+                        <h3>Research Design for Innovation, Policy and Entrepreneurship Studies</h3>
+                        <p class="course-sub"><span class="code">IPEN5120</span>Teaching Assistant</p>
+                    </div>
+                    <span class="term">Spring 2026</span>
                 </div>
                 <div class="course-row">
-                    <div><span class="code">SOCH 5000</span><h3>Introduction to Technological Innovation and Social Entrepreneurship</h3></div>
-                    <span class="term">Fall 2025 · Teaching Assistant</span>
+                    <div class="course-info">
+                        <h3>Introduction to Technological Innovation and Social Entrepreneurship</h3>
+                        <p class="course-sub"><span class="code">SOCH 5000</span>Teaching Assistant</p>
+                    </div>
+                    <span class="term">Fall 2025</span>
                 </div>
                 <div class="course-row">
-                    <div><span class="code">UCMP 6030</span><h3>Cross-disciplinary Design Thinking</h3></div>
-                    <span class="term">Spring 2025 · Teaching Assistant</span>
+                    <div class="course-info">
+                        <h3>Cross-disciplinary Design Thinking</h3>
+                        <p class="course-sub"><span class="code">UCMP 6030</span>Teaching Assistant</p>
+                    </div>
+                    <span class="term">Spring 2025</span>
                 </div>
                 <p class="teaching-note">All courses taught at The Hong Kong University of Science and Technology (Guangzhou).</p>
             </section>
