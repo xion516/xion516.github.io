@@ -203,6 +203,53 @@
         }
         .subsection-label:first-of-type { margin-top: 0; }
 
+        /* 引用按钮 + 弹窗（Google Scholar 风格） */
+        .cite-btn {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-size: 0.82rem; color: var(--accent); text-decoration: none;
+            font-weight:500; background:none; border:none; cursor:pointer; padding:0;
+        }
+        .cite-btn:hover { text-decoration: underline; }
+        .cite-btn svg { width: 14px; height: 14px; }
+        .cite-overlay {
+            position: fixed; inset: 0; z-index: 100;
+            background: rgba(15,23,42,0.45); display: none;
+            align-items: center; justify-content: center; padding: 24px;
+        }
+        .cite-overlay.open { display: flex; }
+        .cite-modal {
+            background: #fff; border-radius: 14px; max-width: 660px; width: 100%;
+            max-height: 82vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            padding: 24px 26px;
+        }
+        .cite-modal .cite-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 6px; }
+        .cite-modal h3 { font-size: 1.1rem; margin-bottom: 4px; }
+        .cite-modal .cite-sub { color: var(--muted); font-size: 0.84rem; margin-bottom: 18px; }
+        .cite-modal .close-btn {
+            border: none; background: none; cursor: pointer; color: var(--muted);
+            font-size: 1.6rem; line-height: 1; padding: 0 4px;
+        }
+        .cite-modal .close-btn:hover { color: var(--text); }
+        .cite-format { margin-bottom: 16px; }
+        .cite-format:last-child { margin-bottom: 0; }
+        .cite-format .fmt-head {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;
+        }
+        .cite-format .fmt-name {
+            font-size: 0.78rem; font-weight: 600; color: var(--muted);
+            text-transform: uppercase; letter-spacing: .04em;
+        }
+        .cite-format .copy-btn {
+            font-size: 0.8rem; color: var(--accent); background: #eff6ff; border: none;
+            border-radius: 6px; padding: 4px 14px; cursor: pointer; font-weight: 500;
+        }
+        .cite-format .copy-btn:hover { background: #dbeafe; }
+        .cite-format pre {
+            background: #f6f7f9; border: 1px solid var(--border); border-radius: 8px;
+            padding: 12px 14px; font-size: 0.82rem; white-space: pre-wrap; word-break: break-word;
+            color: #374151; margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+
         /* 教学 */
         .course-row {
             display: flex; justify-content: space-between; align-items: flex-start;
@@ -346,7 +393,7 @@
                     <p class="authors"><strong>Xiong, D.</strong>, Ma, Z., Ling, H., Wu, X., Fan, M., &amp; Zhang, X.</p>
                     <p class="venue" data-zh="《International Journal of Human–Computer Interaction》，2026">International Journal of Human–Computer Interaction, 2026</p>
                     <p class="abs" data-zh="我们采用组间实验设计，将被动视频与「非情绪化」「情绪化」两种交互式 VR 模拟（模拟低视力群体的出行障碍场景）进行对比。两个 VR 组的共情水平均高于视频组，但情绪化 VR 并未带来额外的可测量提升；相反，非情绪化 VR 产生的设计想法与用户真实需求的契合度高于其余两组。基于认知负荷理论，我们认为情绪强度会施加一种隐性的认知代价，削弱共情本应带来的设计收益。">We conducted a between-subjects experiment comparing passive video with non-emotional and emotional interactive VR simulations of low-vision mobility challenges. Both VR conditions increased empathy relative to video, but emotional VR produced no additional measurable gain, whereas non-emotional VR produced stronger user-need-aligned ideation. Drawing on cognitive load theory, we argue that emotional intensity can impose a hidden cognitive cost that undercuts the design benefits of empathy.</p>
-                    <p class="links"><a href="https://doi.org/10.1080/10447318.2026.2730903" target="_blank" rel="noopener">DOI</a></p>
+                    <p class="links"><a href="https://doi.org/10.1080/10447318.2026.2730903" target="_blank" rel="noopener">DOI</a><button class="cite-btn" type="button" data-pub="p1" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.17 17c.51 0 .98-.29 1.2-.74l1.42-2.84c.14-.28.21-.58.21-.89V8c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h2l-1.03 2.06c-.45.9.2 1.94 1.2 1.94zm10 0c.51 0 .98-.29 1.2-.74l1.42-2.84c.14-.28.21-.58.21-.89V8c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h2l-1.03 2.06c-.45.9.2 1.94 1.2 1.94z"/></svg><span data-zh="引用">Cite</span></button></p>
 
                     <div class="pub-history">
                         <p class="ph-label" data-zh="发表历程">Publication History</p>
@@ -372,7 +419,7 @@
                     <p class="authors">Zheng, W., <strong>Xiong, D.</strong>, Li, J., Jiang, J., Weng, C., Zhou, J., &amp; Fan, M.</p>
                     <p class="venue" data-zh="第 17 届视觉信息传播与交互国际研讨会（VINCI），2024，pp. 1–9">17th International Symposium on Visual Information Communication and Interaction (VINCI), 2024, pp. 1–9</p>
                     <p class="abs" data-zh="研究虚拟物体尺寸的「确认 / 调整」比例：物体越大，参与者正确确认其尺寸的可能性越低，所需的调整次数也越多。">Confirmation/adjustment ratios for virtual object sizes; participants' correct size confirmation likelihood decreases with object size, requiring more adjustments for larger objects.</p>
-                    <p class="links"><a href="https://doi.org/10.1145/3678698.3678706" target="_blank" rel="noopener">DOI</a></p>
+                    <p class="links"><a href="https://doi.org/10.1145/3678698.3678706" target="_blank" rel="noopener">DOI</a><button class="cite-btn" type="button" data-pub="p2" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.17 17c.51 0 .98-.29 1.2-.74l1.42-2.84c.14-.28.21-.58.21-.89V8c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h2l-1.03 2.06c-.45.9.2 1.94 1.2 1.94zm10 0c.51 0 .98-.29 1.2-.74l1.42-2.84c.14-.28.21-.58.21-.89V8c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h2l-1.03 2.06c-.45.9.2 1.94 1.2 1.94z"/></svg><span data-zh="引用">Cite</span></button></p>
                 </div>
 
                 <div class="subsection-label" data-zh="进行中的研究">Ongoing Process</div>
@@ -470,6 +517,117 @@
                     window.__setLang(lang === 'zh' ? 'en' : 'zh');
                 });
             }
+        })();
+    </script>
+
+    <!-- 引用弹窗（Google Scholar 风格） -->
+    <div class="cite-overlay" id="citeOverlay" aria-hidden="true">
+        <div class="cite-modal" role="dialog" aria-modal="true" aria-label="引用">
+            <div class="cite-head">
+                <div>
+                    <h3 data-zh="引用">Cite</h3>
+                    <p class="cite-sub" data-zh="点击「复制」即可粘贴到参考文献列表。">Click "Copy" to paste the citation into your reference list.</p>
+                </div>
+                <button class="close-btn" id="citeClose" type="button" aria-label="关闭">×</button>
+            </div>
+            <div class="cite-formats" id="citeFormats"></div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var PUBS = {
+                p1: {
+                    apa: "Xiong, D., Ma, Z., Ling, H., Wu, X., Fan, M., & Zhang, X. (2026). Cognitive load as a hidden cost of empathy: Tradeoffs in using VR for inclusive design. International Journal of Human–Computer Interaction, 1–21. https://doi.org/10.1080/10447318.2026.2730903",
+                    mla: "Xiong, Dawei, et al. \"Cognitive Load as a Hidden Cost of Empathy: Tradeoffs in Using VR for Inclusive Design.\" International Journal of Human–Computer Interaction, 2026, pp. 1–21, https://doi.org/10.1080/10447318.2026.2730903.",
+                    chicago: "Xiong, Dawei, Zhijun Ma, Hao Ling, Xun Wu, Mingming Fan, and Xu Zhang. 2026. \"Cognitive Load as a Hidden Cost of Empathy: Tradeoffs in Using VR for Inclusive Design.\" International Journal of Human–Computer Interaction, 1–21. https://doi.org/10.1080/10447318.2026.2730903.",
+                    bibtex: "@article{xiong2026cognitive,\n  title = {Cognitive Load as a Hidden Cost of Empathy: Tradeoffs in Using VR for Inclusive Design},\n  author = {Xiong, Dawei and Ma, Zhijun and Ling, Hao and Wu, Xun and Fan, Mingming and Zhang, Xu},\n  journal = {International Journal of Human--Computer Interaction},\n  year = {2026},\n  pages = {1--21},\n  doi = {10.1080/10447318.2026.2730903},\n  publisher = {Informa UK Limited}\n}"
+                },
+                p2: {
+                    apa: "Zheng, W., Xiong, D., Li, J., Jiang, J., Weng, C., Zhou, J., & Fan, M. (2024). Investigating size congruency between the visual perception of a VR object and the haptic perception of its physical world agent. Proceedings of the 17th International Symposium on Visual Information Communication and Interaction, 1–9. https://doi.org/10.1145/3678698.3678706",
+                    mla: "Zheng, Wenqi, et al. \"Investigating Size Congruency Between the Visual Perception of a VR Object and the Haptic Perception of Its Physical World Agent.\" Proceedings of the 17th International Symposium on Visual Information Communication and Interaction, ACM, 2024, pp. 1–9, https://doi.org/10.1145/3678698.3678706.",
+                    chicago: "Zheng, Wenqi, Dawei Xiong, Junwei Li, Jiajun Jiang, Cekai Weng, Jinni Zhou, and Mingming Fan. 2024. \"Investigating Size Congruency Between the Visual Perception of a VR Object and the Haptic Perception of Its Physical World Agent.\" In Proceedings of the 17th International Symposium on Visual Information Communication and Interaction, 1–9. ACM. https://doi.org/10.1145/3678698.3678706.",
+                    bibtex: "@inproceedings{zheng2024investigating,\n  title = {Investigating Size Congruency Between the Visual Perception of a VR Object and the Haptic Perception of Its Physical World Agent},\n  author = {Zheng, Wenqi and Xiong, Dawei and Li, Junwei and Jiang, Jiajun and Weng, Cekai and Zhou, Jinni and Fan, Mingming},\n  booktitle = {Proceedings of the 17th International Symposium on Visual Information Communication and Interaction},\n  year = {2024},\n  pages = {1--9},\n  publisher = {ACM},\n  doi = {10.1145/3678698.3678706}\n}"
+                }
+            };
+
+            var FORMAT_ORDER = [
+                { key: 'apa', name: 'APA' },
+                { key: 'mla', name: 'MLA' },
+                { key: 'chicago', name: 'Chicago' },
+                { key: 'bibtex', name: 'BibTeX' }
+            ];
+
+            var overlay = document.getElementById('citeOverlay');
+            var formats = document.getElementById('citeFormats');
+            var closeBtn = document.getElementById('citeClose');
+
+            function escapeHtml(s) {
+                return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            }
+
+            function copyText(text, btn) {
+                function done() {
+                    var zh = document.documentElement.lang === 'zh-CN';
+                    btn.textContent = zh ? '已复制 ✓' : 'Copied ✓';
+                    setTimeout(function () { btn.textContent = zh ? '复制' : 'Copy'; }, 1600);
+                }
+                function fallback() {
+                    var ta = document.createElement('textarea');
+                    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+                    document.body.appendChild(ta); ta.focus(); ta.select();
+                    try { document.execCommand('copy'); done(); } catch (e) {}
+                    document.body.removeChild(ta);
+                }
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(done, fallback);
+                } else {
+                    fallback();
+                }
+            }
+
+            function openCite(pubId) {
+                var pub = PUBS[pubId];
+                if (!pub) return;
+                var zh = document.documentElement.lang === 'zh-CN';
+                var copyLabel = zh ? '复制' : 'Copy';
+                var html = '';
+                FORMAT_ORDER.forEach(function (f) {
+                    var v = pub[f.key];
+                    if (!v) return;
+                    html += '<div class="cite-format">'
+                          + '<div class="fmt-head"><span class="fmt-name">' + f.name + '</span>'
+                          + '<button class="copy-btn" type="button" data-text="' + encodeURIComponent(v) + '">' + copyLabel + '</button></div>'
+                          + '<pre>' + escapeHtml(v) + '</pre></div>';
+                });
+                formats.innerHTML = html;
+                var btns = formats.querySelectorAll('.copy-btn');
+                for (var i = 0; i < btns.length; i++) {
+                    (function (b) {
+                        b.addEventListener('click', function () {
+                            copyText(decodeURIComponent(b.getAttribute('data-text')), b);
+                        });
+                    })(btns[i]);
+                }
+                overlay.classList.add('open');
+                overlay.setAttribute('aria-hidden', 'false');
+            }
+
+            function closeCite() {
+                overlay.classList.remove('open');
+                overlay.setAttribute('aria-hidden', 'true');
+            }
+
+            var citeBtns = document.querySelectorAll('.cite-btn');
+            for (var j = 0; j < citeBtns.length; j++) {
+                citeBtns[j].addEventListener('click', function () {
+                    openCite(this.getAttribute('data-pub'));
+                });
+            }
+
+            closeBtn.addEventListener('click', closeCite);
+            overlay.addEventListener('click', function (e) { if (e.target === overlay) closeCite(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeCite(); });
         })();
     </script>
 </body>
