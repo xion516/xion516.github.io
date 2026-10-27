@@ -171,6 +171,13 @@
         }
         .lang-toggle:hover { color: var(--accent); border-color: var(--accent); }
         a.lang-toggle { text-decoration: none; display: inline-block; line-height: 1.4; }
+        .cv-link {
+            font-family: inherit; font-size: 0.85rem; color: var(--accent);
+            background: none; border: 1px solid var(--accent); border-radius: 8px;
+            padding: 5px 13px; text-decoration: none; white-space: nowrap;
+            transition: background .15s, color .15s;
+        }
+        .cv-link:hover { background: var(--accent); color: #fff; }
         html.lang-flash body { visibility: hidden; }
 
         /* 主容器：左右两栏 */
@@ -392,6 +399,90 @@
             .avatar-wrapper { width: 160px; height: 160px; }
             .nav-links { overflow-x: auto; }
         }
+
+        /* ===== 打印样式：Ctrl+P 直接出可当简历用的排版 ===== */
+        @media print {
+            @page { margin: 14mm 12mm; }
+
+            html, body {
+                background: #fff !important;
+                color: #000 !important;
+                font-size: 10.5pt;
+                line-height: 1.5;
+            }
+
+            /* 导航与纯界面元素不打印 */
+            nav, .cite-overlay, .cite-btn, .avatar-hint, .lang-toggle, .cv-link, .copy-btn { display: none !important; }
+
+            /* 悬停图不打印（避免误出妻子照片），保留头像 */
+            .avatar-wrapper img.hover { display: none !important; }
+
+            /* 单栏排版：侧栏在上，正文在下 */
+            .container {
+                display: block !important;
+                max-width: none !important;
+                padding: 0 !important;
+            }
+            .sidebar-sticky {
+                position: static !important;
+                display: grid !important;
+                grid-template-columns: 64pt 1fr;
+                align-items: start; column-gap: 14pt;
+                margin-bottom: 18pt;
+                padding-bottom: 10pt; border-bottom: 1px solid #ddd;
+            }
+            .avatar-wrapper {
+                grid-column: 1; grid-row: 1 / span 3; align-self: center;
+                width: 64pt !important; height: 64pt !important;
+                margin: 0 !important; border-radius: 50% !important;
+                box-shadow: none !important;
+            }
+            .sidebar h1 { grid-column: 2; grid-row: 1; font-size: 15pt; margin: 0; text-align: left; }
+            .sidebar .role { grid-column: 2; grid-row: 2; text-align: left; margin: 0; color: #333 !important; }
+            .sidebar .affil { grid-column: 2; grid-row: 3; text-align: left; margin: 0; }
+            .social-row {
+                grid-column: 1 / -1; grid-row: 4;
+                margin: 8pt 0 0 0; gap: 10pt; justify-content: flex-start;
+            }
+            .social-row a { border: none; width: auto; height: auto; }
+            .social-row svg { width: 14pt; height: 14pt; }
+            /* 纸面上没有悬浮提示，邮箱等文字地址必须显式附上 */
+            .social-row a[href^="mailto:"]::after {
+                content: " " attr(href) " (" attr(aria-label) ")";
+                font-size: 8.5pt; color: #333;
+            }
+            .interest-box {
+                grid-column: 1 / -1; grid-row: 5;
+                border: none; padding: 6pt 0 0 0; margin-top: 6pt;
+            }
+            .interest-box .tag { background: none; border: 1px solid #ccc; padding: 1pt 7pt; }
+
+            /* 卡片去底色、去阴影，正文纯黑 */
+            .pub-card, .ongoing-card, .pub-history {
+                background: none !important; border: none !important;
+                box-shadow: none !important; padding: 0 !important; margin-bottom: 14pt !important;
+                break-inside: avoid; page-break-inside: avoid;
+            }
+            .main .block { margin-bottom: 16pt; }
+            .main h2 {
+                font-size: 13pt; border-bottom: 1px solid #000;
+                padding-bottom: 3pt; margin-bottom: 8pt; width: 100%;
+                break-after: avoid; page-break-after: avoid;
+            }
+            .subsection-label { color: #444 !important; break-after: avoid; page-break-after: avoid; }
+            .pub-card .abs, .bio, .venue-note { color: #222 !important; }
+            .pub-card .meta, .venue, .timeline-item .place,
+            .supervisors, .teaching-note, .course-sub, .avatar-hint { color: #555 !important; }
+            .timeline-item { break-inside: avoid; page-break-inside: avoid; }
+            a { color: #000 !important; text-decoration: none !important; }
+
+            /* 链接后面附上真实 URL（纸面无法点击） */
+            .pub-card .links a[href]::after,
+            .ongoing-card .links a[href]::after {
+                content: " (" attr(href) ")";
+                font-size: 8pt; color: #666; word-break: break-all;
+            }
+        }
     </style>
 </head>
 <body>
@@ -406,6 +497,7 @@
                     <a href="#research">研究</a>
                     <a href="#teaching">教学</a>
                 </div>
+                <a class="cv-link" href="/cv-zh.pdf" download>简历</a>
                 <a class="lang-toggle" href="/" aria-label="Switch to English">EN</a>
             </div>
         </div>
