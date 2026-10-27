@@ -237,7 +237,8 @@
         .social-row svg { width: 20px; height: 20px; }
 
         .interest-box {
-            background: var(--card); border: 1px solid var(--border);
+            /* 背景透明：让侧栏线描水印的头部从卡片下方透出来，不被不透明底色截断 */
+            background: transparent; border: 1px solid var(--border);
             border-radius: 12px; padding: 18px 20px;
         }
         .interest-box h2 { font-size: 0.95rem; margin-bottom: 12px; }
