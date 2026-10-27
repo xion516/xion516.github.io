@@ -156,7 +156,11 @@
             display: flex; align-items: center; justify-content: space-between;
             height: 60px;
         }
-        .nav-brand { font-size: 1.15rem; font-weight: 600; }
+        .nav-brand {
+            font-size: 1.15rem; font-weight: 600;
+            display: inline-flex; align-items: center; gap: 9px;
+        }
+        .nav-logo { width: 26px; height: 26px; display: block; flex: none; }
         .nav-links { display: flex; gap: 6px; }
         .nav-links a {
             color: var(--muted); text-decoration: none; font-size: 0.9rem;
@@ -191,6 +195,13 @@
 
         /* 左栏 */
         .sidebar-sticky { position: sticky; top: 88px; }
+
+        /* 侧栏水印：线描肖像超大淡印，纯装饰（随 sticky 常驻左栏下方） */
+        .sidebar-watermark {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            bottom: -128px; width: 220px; height: 220px;
+            opacity: .05; pointer-events: none; z-index: 0;
+        }
 
         .avatar-wrapper {
             width: 200px; height: 200px; margin: 0 auto 24px;
@@ -408,7 +419,11 @@
         .footer-links { display: flex; flex-wrap: wrap; gap: 6px 16px; }
         .footer-links a { color: var(--muted); text-decoration: none; }
         .footer-links a:hover { color: var(--accent); }
-        .footer-copy { margin-left: auto; }
+        .footer-copy {
+            margin-left: auto;
+            display: inline-flex; align-items: center; gap: 7px;
+        }
+        .footer-mark { width: 20px; height: 20px; display: block; flex: none; }
         .footer-a11y { flex-basis: 100%; color: #6b7280; font-size: 0.78rem; }
 
         /* 跳过导航（WCAG 2.4.1 Bypass Blocks）：仅键盘聚焦时显形 */
@@ -444,6 +459,7 @@
             .avatar-wrapper { width: 160px; height: 160px; }
             .nav-links { overflow-x: auto; }
             .footer-copy { margin-left: 0; }
+            .sidebar-watermark { display: none; }
         }
 
         /* ===== 打印样式：Ctrl+P 友好排版（隐藏导航、单栏、纸面附链接 URL） ===== */
@@ -459,6 +475,9 @@
 
             /* 导航与纯界面元素不打印 */
             body > nav, .cite-overlay, .cite-btn, .avatar-hint, .lang-toggle, .copy-btn, .skip-link { display: none !important; }
+
+            /* 纯装饰的水印/logo 不进纸面 */
+            .sidebar-watermark, .nav-logo, .footer-mark { display: none !important; }
 
             /* 悬停图不打印（避免误出妻子照片），保留头像 */
             .avatar-wrapper img.hover { display: none !important; }
@@ -545,7 +564,10 @@
 
     <nav aria-label="Main navigation">
         <div class="nav-inner">
-            <span class="nav-brand serif" data-zh="熊大卫">Dawei Xiong</span>
+            <span class="nav-brand">
+                <img class="nav-logo" src="/mark-sm.png?v=20261027" alt="" aria-hidden="true" width="26" height="26">
+                <span class="serif" data-zh="熊大卫">Dawei Xiong</span>
+            </span>
             <div class="nav-right">
                 <div class="nav-links">
                     <a href="#about" data-zh="关于我">About</a>
@@ -594,6 +616,8 @@
                     <span class="tag" data-zh="虚拟现实">Virtual Reality</span>
                     <span class="tag" data-zh="公共服务">Public Service</span>
                 </div>
+
+                <img class="sidebar-watermark" src="/mark.png?v=20261027" alt="" aria-hidden="true" width="220" height="220">
             </div>
         </aside>
 
@@ -776,7 +800,10 @@
                 <a href="https://github.com/xion516" target="_blank" rel="noopener" data-zh="GitHub">GitHub</a>
                 <a href="https://orcid.org/0009-0006-2995-7385" target="_blank" rel="noopener" data-zh="ORCID">ORCID</a>
             </nav>
-            <span class="footer-copy">© 2026 Dawei Xiong</span>
+            <span class="footer-copy">
+                <img class="footer-mark" src="/mark-sm.png?v=20261027" alt="" aria-hidden="true" width="20" height="20">
+                © 2026 Dawei Xiong
+            </span>
             <p class="footer-a11y" data-zh="本页面使用语义化 HTML 构建，支持键盘导航与屏幕阅读器。">Built with semantic HTML, keyboard navigation, and screen-reader support.</p>
         </div>
     </footer>
