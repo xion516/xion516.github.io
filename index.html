@@ -4,15 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dawei Xiong | AI Agent, VR & Public Service, HKUST(GZ)</title>
-    <script>
-        (function () {
-            try {
-                if (localStorage.getItem('xion516-lang') === 'zh') {
-                    document.documentElement.classList.add('lang-flash');
-                }
-            } catch (e) {}
-        })();
-    </script>
     <meta name="description" content="AI agents, virtual reality and public service — a PhD researcher at HKUST (Guangzhou) studying how emerging tech shapes human behavior in public service.">
     <meta name="author" content="Dawei Xiong">
     <link rel="canonical" href="https://xion516.com/">
@@ -179,7 +170,17 @@
             transition: color .15s, border-color .15s;
         }
         .lang-toggle:hover { color: var(--accent); border-color: var(--accent); }
-        html.lang-flash body { visibility: hidden; }
+        a.lang-toggle { text-decoration: none; display: inline-block; line-height: 1.4; }
+
+        /* 锚点滚动避让：顶部导航是 sticky（高 60px），留 12px 呼吸位，避免标题被压住 */
+        html { scroll-padding-top: 72px; }
+        section[id] { scroll-margin-top: 72px; }
+
+        /* 键盘焦点环：只在键盘操作时出现（:focus-visible），鼠标点击不显示 */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
 
         /* 主容器：左右两栏 */
         .container {
@@ -392,11 +393,44 @@
         .course-row .term { flex: 0 0 auto; color: var(--muted); font-size: 0.86rem; padding-top: 3px; }
         .teaching-note { color: var(--muted); font-size: 0.85rem; margin-top: 16px; }
 
+        /* ===== 页脚 ===== */
+        .site-footer {
+            max-width: 1100px; margin: 0 auto; padding: 0 24px 56px;
+            color: var(--muted); font-size: 0.85rem;
+        }
+        .site-footer-inner {
+            border-top: 1px solid var(--border); padding-top: 22px;
+            display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px;
+        }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+        .footer-links a { color: var(--muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-copy { margin-left: auto; }
+        .footer-a11y { flex-basis: 100%; color: #9ca3af; font-size: 0.78rem; }
+
+        /* 视觉隐藏但屏幕阅读器可读 */
+        .visually-hidden {
+            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+        }
+
+        /* 尊重系统「减少动态效果」：关掉头像淡入等过渡动画 */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .avatar-wrapper img { transition: none !important; }
+        }
+
         @media (max-width: 860px) {
             .container { grid-template-columns: 1fr; gap: 32px; }
             .sidebar-sticky { position: static; }
             .avatar-wrapper { width: 160px; height: 160px; }
             .nav-links { overflow-x: auto; }
+            .footer-copy { margin-left: 0; }
         }
 
         /* ===== 打印样式：Ctrl+P 友好排版（隐藏导航、单栏、纸面附链接 URL） ===== */
@@ -411,7 +445,7 @@
             }
 
             /* 导航与纯界面元素不打印 */
-            nav, .cite-overlay, .cite-btn, .avatar-hint, .lang-toggle, .copy-btn { display: none !important; }
+            body > nav, .cite-overlay, .cite-btn, .avatar-hint, .lang-toggle, .copy-btn { display: none !important; }
 
             /* 悬停图不打印（避免误出妻子照片），保留头像 */
             .avatar-wrapper img.hover { display: none !important; }
@@ -481,6 +515,15 @@
                 content: " (" attr(href) ")";
                 font-size: 8pt; color: #666; word-break: break-all;
             }
+
+            /* 页脚：保留联系方式并附上真实 URL，去掉无障碍说明行 */
+            .site-footer { padding: 0 0 0; font-size: 9pt; }
+            .site-footer-inner { border-top: 1px solid #ddd; padding-top: 8pt; }
+            .footer-links a[href]::after {
+                content: " (" attr(href) ")";
+                font-size: 8pt; color: #666; word-break: break-all;
+            }
+            .footer-a11y { display: none; }
         }
     </style>
 </head>
@@ -496,7 +539,7 @@
                     <a href="#research" data-zh="研究">Research</a>
                     <a href="#teaching" data-zh="教学">Teaching</a>
                 </div>
-                <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to Chinese">中文</button>
+                <a class="lang-toggle" href="/zh/" hreflang="zh-CN" aria-label="Switch to Chinese">中文</a>
             </div>
         </div>
     </nav>
@@ -710,48 +753,18 @@
         </main>
     </div>
 
-    <script>
-        (function () {
-            var KEY = 'xion516-lang';
-            var orig = new WeakMap();
-
-            function apply(lang) {
-                var nodes = document.querySelectorAll('[data-zh]');
-                for (var i = 0; i < nodes.length; i++) {
-                    var el = nodes[i];
-                    if (!orig.has(el)) { orig.set(el, el.innerHTML); }
-                    var v = (lang === 'zh') ? el.getAttribute('data-zh') : null;
-                    el.innerHTML = (v !== null && v !== undefined) ? v : orig.get(el);
-                }
-                document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
-                document.title = (lang === 'zh')
-                    ? '熊大卫 | 行为公共管理 · AI 智能体 · 虚拟现实 · 公共服务'
-                    : 'Dawei Xiong | AI Agent, VR & Public Service, HKUST(GZ)';
-                var btn = document.getElementById('langToggle');
-                if (btn) {
-                    btn.textContent = (lang === 'zh') ? 'EN' : '中文';
-                    btn.setAttribute('aria-label', (lang === 'zh') ? 'Switch to English' : '切换到中文');
-                }
-                document.documentElement.classList.remove('lang-flash');
-            }
-
-            var lang = 'en';
-            try { lang = localStorage.getItem(KEY) || 'en'; } catch (e) {}
-            window.__setLang = function (l) {
-                lang = l;
-                try { localStorage.setItem(KEY, l); } catch (e) {}
-                apply(l);
-            };
-            apply(lang);
-
-            var btn = document.getElementById('langToggle');
-            if (btn) {
-                btn.addEventListener('click', function () {
-                    window.__setLang(lang === 'zh' ? 'en' : 'zh');
-                });
-            }
-        })();
-    </script>
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <nav class="footer-links" aria-label="Contact">
+                <a href="mailto:dxiong107@connect.hkust-gz.edu.cn" data-zh="电子邮件">Email</a>
+                <a href="https://scholar.google.com/citations?hl=zh-CN&user=pcachyQAAAAJ" target="_blank" rel="noopener" data-zh="谷歌学术">Google Scholar</a>
+                <a href="https://github.com/xion516" target="_blank" rel="noopener" data-zh="GitHub">GitHub</a>
+                <a href="https://orcid.org/0009-0006-2995-7385" target="_blank" rel="noopener" data-zh="ORCID">ORCID</a>
+            </nav>
+            <span class="footer-copy">© 2026 Dawei Xiong</span>
+            <p class="footer-a11y" data-zh="本页面使用语义化 HTML 构建，支持键盘导航与屏幕阅读器。">Built with semantic HTML, keyboard navigation, and screen-reader support.</p>
+        </div>
+    </footer>
 
     <!-- 引用弹窗（Google Scholar 风格） -->
     <div class="cite-overlay" id="citeOverlay" aria-hidden="true">
@@ -794,6 +807,7 @@
             var overlay = document.getElementById('citeOverlay');
             var formats = document.getElementById('citeFormats');
             var closeBtn = document.getElementById('citeClose');
+            var lastFocused = null;
 
             function escapeHtml(s) {
                 return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -844,12 +858,32 @@
                 }
                 overlay.classList.add('open');
                 overlay.setAttribute('aria-hidden', 'false');
+                lastFocused = document.activeElement;
+                closeBtn.focus();
             }
 
             function closeCite() {
                 overlay.classList.remove('open');
                 overlay.setAttribute('aria-hidden', 'true');
+                if (lastFocused && lastFocused.focus) { lastFocused.focus(); }
+                lastFocused = null;
             }
+
+            /* 焦点陷阱：Tab 在弹窗内循环，不会跑到背后的页面 */
+            var FOCUSABLE = 'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+            function trapFocus(e) {
+                if (e.key !== 'Tab') return;
+                if (!overlay.classList.contains('open')) return;
+                var items = overlay.querySelectorAll(FOCUSABLE);
+                if (!items.length) return;
+                var first = items[0], last = items[items.length - 1];
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault(); last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault(); first.focus();
+                }
+            }
+            document.addEventListener('keydown', trapFocus);
 
             var citeBtns = document.querySelectorAll('.cite-btn');
             for (var j = 0; j < citeBtns.length; j++) {
