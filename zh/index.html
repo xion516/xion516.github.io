@@ -203,6 +203,9 @@
             opacity: .05; pointer-events: none; z-index: 0;
         }
 
+        /* 水印必须沉在内容之下：绝对定位 z-index:0 会盖住标签文字 */
+        .sidebar-sticky > *:not(.sidebar-watermark) { position: relative; z-index: 1; }
+
         .avatar-wrapper {
             width: 200px; height: 200px; margin: 0 auto 24px;
             position: relative; border-radius: 16px; overflow: hidden;
