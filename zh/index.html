@@ -204,11 +204,12 @@
         .avatar-wrapper img.hover { opacity: 0; }
         .avatar-wrapper:hover img.hover { opacity: 1; }
         .avatar-hint {
-            text-align: center; font-size: 0.72rem; color: #b0b0b0; margin: -14px 0 18px;
+            /* WCAG AA 4.5:1 —— #b0b0b0 on #fbfbfb 只有 2.10:1 */
+            text-align: center; font-size: 0.72rem; color: #6b7280; margin: -14px 0 18px;
         }
 
         .sidebar h1 { font-size: 1.7rem; text-align: center; margin-bottom: 4px; }
-        .sidebar .role { text-align: center; color: var(--accent); font-weight: 500; margin-bottom: 4px; }
+        .sidebar .role { text-align: center; color: #2563eb; font-weight: 500; margin-bottom: 4px; }
         .sidebar .affil { text-align: center; color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; }
 
         .social-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 28px; }
@@ -225,9 +226,10 @@
             background: var(--card); border: 1px solid var(--border);
             border-radius: 12px; padding: 18px 20px;
         }
-        .interest-box h3 { font-size: 0.95rem; margin-bottom: 12px; }
+        .interest-box h2 { font-size: 0.95rem; margin-bottom: 12px; }
         .interest-box .tag {
-            display: inline-block; font-size: 0.82rem; color: var(--muted);
+            /* WCAG AA 4.5:1 —— var(--muted) #6b7280 on #f4f4f5 只有 4.40:1，加深到 #5f6770 = 5.22:1 */
+            display: inline-block; font-size: 0.82rem; color: #5f6770;
             background: #f4f4f5; border-radius: 999px; padding: 4px 12px; margin: 0 6px 8px 0;
         }
 
@@ -407,7 +409,17 @@
         .footer-links a { color: var(--muted); text-decoration: none; }
         .footer-links a:hover { color: var(--accent); }
         .footer-copy { margin-left: auto; }
-        .footer-a11y { flex-basis: 100%; color: #9ca3af; font-size: 0.78rem; }
+        .footer-a11y { flex-basis: 100%; color: #6b7280; font-size: 0.78rem; }
+
+        /* 跳过导航（WCAG 2.4.1 Bypass Blocks）：仅键盘聚焦时显形 */
+        .skip-link {
+            /* 白字需 ≥4.5:1 —— 蓝底用 #1d4ed8（6.70:1），不用 --accent 的 #3b82f6（仅 3.68:1） */
+            position: fixed; top: -64px; left: 12px; z-index: 200;
+            background: #1d4ed8; color: #fff; padding: 10px 16px;
+            border-radius: 0 0 8px 8px; text-decoration: none; font-size: 0.9rem;
+            transition: top 0.15s ease;
+        }
+        .skip-link:focus { top: 0; }
 
         /* 视觉隐藏但屏幕阅读器可读 */
         .visually-hidden {
@@ -446,7 +458,7 @@
             }
 
             /* 导航与纯界面元素不打印 */
-            body > nav, .cite-overlay, .cite-btn, .avatar-hint, .lang-toggle, .copy-btn { display: none !important; }
+            body > nav, .cite-overlay, .cite-btn, .avatar-hint, .lang-toggle, .copy-btn, .skip-link { display: none !important; }
 
             /* 悬停图不打印（避免误出妻子照片），保留头像 */
             .avatar-wrapper img.hover { display: none !important; }
@@ -529,7 +541,9 @@
     </style>
 </head>
 <body>
-    <nav>
+    <a class="skip-link" href="#main">跳到主内容</a>
+
+    <nav aria-label="主导航">
         <div class="nav-inner">
             <span class="nav-brand serif">熊大卫</span>
             <div class="nav-right">
@@ -547,11 +561,11 @@
 
     <div class="container">
         <!-- 左栏 -->
-        <aside class="sidebar">
+        <aside class="sidebar" aria-label="个人简介">
             <div class="sidebar-sticky">
                 <div class="avatar-wrapper">
                     <img src="/avatar.jpg" alt="Dawei Xiong" width="512" height="512">
-                    <img class="hover" src="/hover.jpg" alt="" width="512" height="512">
+                    <img class="hover" src="/hover.jpg" alt="" aria-hidden="true" width="512" height="512">
                 </div>
                 <p class="avatar-hint">悬停查看另一面</p>
                 <h1 class="serif">熊大卫</h1>
@@ -574,7 +588,7 @@
                 </div>
 
                 <div class="interest-box">
-                    <h3>研究兴趣</h3>
+                    <h2>研究兴趣</h2>
                     <span class="tag">行为公共管理</span>
                     <span class="tag">AI 智能体</span>
                     <span class="tag">虚拟现实</span>
@@ -584,7 +598,7 @@
         </aside>
 
         <!-- 右栏 -->
-        <main class="main">
+        <main class="main" id="main" tabindex="-1">
             <section id="about" class="block">
                 <h2 class="serif">关于我</h2>
                 <p class="bio">我目前是香港科技大学（广州）社会枢纽创新创业与公共政策学域的博士研究生，研究兴趣包括行为公共管理、AI 智能体、虚拟现实（VR）与公共服务。</p>
@@ -749,7 +763,7 @@
 
     <footer class="site-footer">
         <div class="site-footer-inner">
-            <nav class="footer-links" aria-label="Contact">
+            <nav class="footer-links" aria-label="联系方式">
                 <a href="mailto:dxiong107@connect.hkust-gz.edu.cn">电子邮件</a>
                 <a href="https://scholar.google.com/citations?hl=zh-CN&user=pcachyQAAAAJ" target="_blank" rel="noopener">谷歌学术</a>
                 <a href="https://github.com/xion516" target="_blank" rel="noopener">GitHub</a>
@@ -762,10 +776,10 @@
 
     <!-- 引用弹窗（Google Scholar 风格） -->
     <div class="cite-overlay" id="citeOverlay" aria-hidden="true">
-        <div class="cite-modal" role="dialog" aria-modal="true" aria-label="引用">
+        <div class="cite-modal" role="dialog" aria-modal="true" aria-labelledby="citeTitle">
             <div class="cite-head">
                 <div>
-                    <h3>引用</h3>
+                    <h3 id="citeTitle">引用</h3>
                     <p class="cite-sub">点击「复制」即可粘贴到参考文献列表。</p>
                 </div>
                 <button class="close-btn" id="citeClose" type="button" aria-label="关闭">×</button>
