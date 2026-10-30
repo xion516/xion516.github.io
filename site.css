@@ -301,6 +301,9 @@
         }
         .footer-mark { width: 20px; height: 20px; display: block; flex: none; }
         .footer-a11y { flex-basis: 100%; color: #6b7280; font-size: 0.78rem; }
+        .footer-icp { flex-basis: 100%; margin: 0; color: #6b7280; font-size: 0.78rem; }
+        .footer-icp a { color: var(--muted); text-decoration: none; }
+        .footer-icp a:hover { color: var(--accent); }
 
         /* 跳过导航（WCAG 2.4.1 Bypass Blocks）：仅键盘聚焦时显形 */
         .skip-link {
