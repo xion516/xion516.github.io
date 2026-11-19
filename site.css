@@ -166,11 +166,8 @@
         .pub-card .links a:hover { text-decoration: underline; }
         .pub-card .links a.wx { color: #0f9d58; }
         .pub-card .links a.wx:hover { color: #0b7c46; }
-        .pub-card .links a.bili {
-            color: #fb7299; display: inline-flex; align-items: center; gap: 4px;
-        }
+        .pub-card .links a.bili { color: #fb7299; }
         .pub-card .links a.bili:hover { color: #e5608d; }
-        .pub-card .links a.bili svg { width: 13px; height: 13px; }
 
         /* 履历嵌套块 */
         .pub-history {
